@@ -40,7 +40,7 @@ public class PerBtwnEmptyMapAndHashMapT {
 		
 		startTime = System.nanoTime();
 		for (int i = 0; i < 100000000; i++) {
-			Map map = new HashMap<>();
+			Map map = new HashMap();
 		}
 		endTime = System.nanoTime();
 		duration = endTime - startTime;
