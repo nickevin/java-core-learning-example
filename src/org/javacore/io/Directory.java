@@ -45,8 +45,8 @@ public final class Directory {
 	}
 
 	public static class TreeInfo implements Iterable<File>{
-		public List<File> files = new ArrayList<>();
-		public List<File> dirs = new ArrayList<>();
+		public List<File> files = new ArrayList<File>();
+		public List<File> dirs = new ArrayList<File>();
 		
 		@Override
 		public Iterator<File> iterator() {

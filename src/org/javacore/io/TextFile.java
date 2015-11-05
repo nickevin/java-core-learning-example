@@ -112,7 +112,7 @@ public class TextFile extends ArrayList<String> {
 		TextFile text = new TextFile("test.txt");
 		text.write("test2.txt");
 		
-		TreeSet<String> words = new TreeSet<>(
+		TreeSet<String> words = new TreeSet<String>(
 				new TextFile("src/org/javacore/io/TextFile.java","\\W+"));
 		System.out.println(words.headSet("a"));
 		

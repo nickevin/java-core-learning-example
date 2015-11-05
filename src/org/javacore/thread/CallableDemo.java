@@ -49,7 +49,7 @@ public class CallableDemo {
         // 创建一个新的线程池
         ExecutorService exec = Executors.newCachedThreadPool();
         // Callable实现类task的返回结果集
-        ArrayList<Future<String>> results = new ArrayList<>();
+        ArrayList<Future<String>> results = new ArrayList<Future<String>>();
         for (int i = 0; i < 5 ; i++)
             results.add(exec.submit(new TaskWithResult(i)));// 使用submit来启动Tasks
 
