@@ -1,7 +1,4 @@
-package org.javacore.thread;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+package org.javacore.reflection;
 
 /*
  * Copyright [2015] [Jeff Lee]
@@ -21,16 +18,29 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Jeff Lee
- * @since 2015-11-2 17:21:04
- * 	线程池CachedThreadPool的简单使用-启动LiftOff线程{@link LiftOff}
+ * @since 2015-11-9 10:45:19
+ * 反射在继承中的案例
  */
-public class CachedThreadPool {
+class Employee {
+    private String name;
+    public Employee(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+}
+class Manager extends Employee {
+    public Manager(String name) {
+        super(name);
+    }
+}
+public class EmployeeClass {
     public static void main(String[] args) {
-        // 创建新线程的线程池
-        ExecutorService exec = Executors.newCachedThreadPool();
-        for (int i = 0 ; i < 5; i++)
-            exec.execute(new LiftOff()); // 由线程池Ececutor决定执行给定的线程。
-        // 顺序关闭，执行以前提交的线程，不接受新的线程。
-        exec.shutdown();
+        Employee employee = new Employee("Jeff");
+        Employee manager = new Manager("Boss");
+        System.out.println(employee.getClass().getName() + " " + employee.getName());
+        System.out.println(manager.getClass().getName() + " " + manager.getName());
     }
 }

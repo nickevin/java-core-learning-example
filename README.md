@@ -26,7 +26,7 @@ Java核心技术学习代码兼测试案例<br>
 	├── org.javacore.io.zip			// Java IO ZIP压缩解压
 	├── org.javacore.nio			// Java NIO
 	├── org.javacore.reflection	// Java 反射
-	├── org.javacore.rtti		// Java RTTI
+	├── org.javacore.rtti			// Java RTTI
 	├── org.javacore.thread		// Java 线程
 	│
 	拼命更新！顶！d=====(￣▽￣*)b
@@ -100,6 +100,10 @@ Java核心技术学习代码兼测试案例<br>
 	├── 	UsingBuffers.java				// 利用buffer实现交换相邻字符
 	├── 	ViewBuffers.java				// 不同视图下的缓冲区
 	├── org.javacore.reflection		// Java 反射
+	├── 	ArrayCopy.java					// 反射扩容对象数组
+	├── 	EmployeeClass.java				// 反射在继承中的案例
+	├── 	ObjectAnalyzer.java				// 反射对象分析工具
+	├── 	ReflectionTest.java				// 反射对象构造函数、方法及字段
 	├── 	User.java						// 反射构造器使用的bean
 	├── 	UserConstructorReflect.java		// 利用反射通过构造器创建一个实例
 	├── org.javacore.rtti				// Java RTTI
@@ -109,12 +113,18 @@ Java核心技术学习代码兼测试案例<br>
 	├── 	BasicThreads.java				// 线程简单使用
 	├── 	CachedThreadPool.java			// 线程池CachedThreadPool的简单使用
 	├── 	CallableDemo.java				// Callable接口的使用 --- 实现带返回值的任务
+ 	├── 	DaemonFromFactory.java			// 后台线程工厂类的使用
+ 	├── 	DaemonThreadFactory.java		// 线程工厂类
+ 	├── 	DaemonsDontRunFinally.java		// 后台线程遇到Finally
 	├── 	FixedThreadPool.java			// 线程池FixedThreadPool的简单使用
 	├── 	LiftOff.java					// Runnable接口的实现类LiftOff
 	├── 	MoreBasicThreads.java			// 线程简单使用-启动多个线程
 	├── 	MyRunnable.java					// Runnable接口的简单使用
 	├── 	MyThread.java					// Thread的简单使用
+	├── 	SimpleDaemons.java				// Daemon后台线程的简单使用
+   	├── 	SimplePriorities.java			// 线程优先级的使用
 	├── 	SingleThreadExecutor.java		// 	SingleThreadExecutor的使用
+	├── 	SleepingTask.java			 // 休眠线程sleep的使用
 	拼命更新！顶！d=====(￣▽￣*)b
 
 ##学习方法
