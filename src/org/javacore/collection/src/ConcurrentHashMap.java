@@ -1,11 +1,11 @@
 /*
- * @(#)ExtConcurrentHashMap.java	1.21 07/01/02
+ * @(#) ConcurrentHashMap.java	1.21 07/01/02
  *
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package org.javacore.collection.map;
+package org.javacore.collection.src;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -71,7 +71,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @param <V>
  *            the type of mapped values
  */
-public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements ConcurrentMap<K, V>, Serializable {
+public class ConcurrentHashMap<K, V> extends AbstractMap<K, V> implements ConcurrentMap<K, V>, Serializable {
 	private static final long serialVersionUID = 7249069246763182397L;
 
 	/*
@@ -139,8 +139,8 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 
 	/**
 	 * Applies a supplemental hash function to a given hashCode, which defends against poor quality hash functions. This
-	 * is critical because ExtConcurrentHashMap uses power-of-two length hash tables, that otherwise encounter
-	 * collisions for hashCodes that do not differ in lower or upper bits.
+	 * is critical because ConcurrentHashMap uses power-of-two length hash tables, that otherwise encounter collisions
+	 * for hashCodes that do not differ in lower or upper bits.
 	 */
 	private static int hash(int h) {
 		// Spread bits to regularize both segment and index locations,
@@ -167,7 +167,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 	/* ---------------- Inner Classes -------------- */
 
 	/**
-	 * ExtConcurrentHashMap list entry. Note that this is never exported out as a user-visible Map.Entry.
+	 * ConcurrentHashMap list entry. Note that this is never exported out as a user-visible Map.Entry.
 	 * 
 	 * Because the value field is volatile, not final, it is legal wrt the Java Memory Model for an unsynchronized
 	 * reader to see null instead of initial value when read via a data race. Although a reordering leading to this is
@@ -545,7 +545,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 	 * @throws IllegalArgumentException
 	 *             if the initial capacity is negative or the load factor or concurrencyLevel are nonpositive.
 	 */
-	public ExtConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel) {
+	public ConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel) {
 		if (!(loadFactor > 0) || initialCapacity < 0 || concurrencyLevel <= 0) {
 			throw new IllegalArgumentException();
 		}
@@ -596,7 +596,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 	 * 
 	 * @since 1.6
 	 */
-	public ExtConcurrentHashMap(int initialCapacity, float loadFactor) {
+	public ConcurrentHashMap(int initialCapacity, float loadFactor) {
 		this(initialCapacity, loadFactor, DEFAULT_CONCURRENCY_LEVEL);
 	}
 
@@ -609,14 +609,14 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 	 * @throws IllegalArgumentException
 	 *             if the initial capacity of elements is negative.
 	 */
-	public ExtConcurrentHashMap(int initialCapacity) {
+	public ConcurrentHashMap(int initialCapacity) {
 		this(initialCapacity, DEFAULT_LOAD_FACTOR, DEFAULT_CONCURRENCY_LEVEL);
 	}
 
 	/**
 	 * Creates a new, empty map with a default initial capacity (16), load factor (0.75) and concurrencyLevel (16).
 	 */
-	public ExtConcurrentHashMap() {
+	public ConcurrentHashMap() {
 		this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR, DEFAULT_CONCURRENCY_LEVEL);
 	}
 
@@ -628,7 +628,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 	 * @param m
 	 *            the map
 	 */
-	public ExtConcurrentHashMap(Map<? extends K, ? extends V> m) {
+	public ConcurrentHashMap(Map<? extends K, ? extends V> m) {
 		this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR,
 				DEFAULT_CONCURRENCY_LEVEL);
 		putAll(m);
@@ -1104,7 +1104,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 			if (lastReturned == null) {
 				throw new IllegalStateException();
 			}
-			ExtConcurrentHashMap.this.remove(lastReturned.key);
+			ConcurrentHashMap.this.remove(lastReturned.key);
 			lastReturned = null;
 		}
 	}
@@ -1136,7 +1136,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 	/**
 	 * Custom Entry class used by EntryIterator.next(), that relays setValue changes to the underlying map.
 	 */
-	final class WriteThroughEntry extends ExtAbstractMap.SimpleEntry<K, V> {
+	final class WriteThroughEntry extends AbstractMap.SimpleEntry<K, V> {
 		WriteThroughEntry(K k, V v) {
 			super(k, v);
 		}
@@ -1153,7 +1153,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 				throw new NullPointerException();
 			}
 			V v = super.setValue(value);
-			ExtConcurrentHashMap.this.put(getKey(), value);
+			ConcurrentHashMap.this.put(getKey(), value);
 			return v;
 		}
 	}
@@ -1174,22 +1174,22 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 
 		@Override
 		public int size() {
-			return ExtConcurrentHashMap.this.size();
+			return ConcurrentHashMap.this.size();
 		}
 
 		@Override
 		public boolean contains(Object o) {
-			return ExtConcurrentHashMap.this.containsKey(o);
+			return ConcurrentHashMap.this.containsKey(o);
 		}
 
 		@Override
 		public boolean remove(Object o) {
-			return ExtConcurrentHashMap.this.remove(o) != null;
+			return ConcurrentHashMap.this.remove(o) != null;
 		}
 
 		@Override
 		public void clear() {
-			ExtConcurrentHashMap.this.clear();
+			ConcurrentHashMap.this.clear();
 		}
 	}
 
@@ -1201,17 +1201,17 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 
 		@Override
 		public int size() {
-			return ExtConcurrentHashMap.this.size();
+			return ConcurrentHashMap.this.size();
 		}
 
 		@Override
 		public boolean contains(Object o) {
-			return ExtConcurrentHashMap.this.containsValue(o);
+			return ConcurrentHashMap.this.containsValue(o);
 		}
 
 		@Override
 		public void clear() {
-			ExtConcurrentHashMap.this.clear();
+			ConcurrentHashMap.this.clear();
 		}
 	}
 
@@ -1227,7 +1227,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 				return false;
 			}
 			Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
-			V v = ExtConcurrentHashMap.this.get(e.getKey());
+			V v = ConcurrentHashMap.this.get(e.getKey());
 			return v != null && v.equals(e.getValue());
 		}
 
@@ -1237,24 +1237,24 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 				return false;
 			}
 			Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
-			return ExtConcurrentHashMap.this.remove(e.getKey(), e.getValue());
+			return ConcurrentHashMap.this.remove(e.getKey(), e.getValue());
 		}
 
 		@Override
 		public int size() {
-			return ExtConcurrentHashMap.this.size();
+			return ConcurrentHashMap.this.size();
 		}
 
 		@Override
 		public void clear() {
-			ExtConcurrentHashMap.this.clear();
+			ConcurrentHashMap.this.clear();
 		}
 	}
 
 	/* ---------------- Serialization Support -------------- */
 
 	/**
-	 * Save the state of the <tt>ExtConcurrentHashMap</tt> instance to a stream (i.e., serialize it).
+	 * Save the state of the <tt> ConcurrentHashMap</tt> instance to a stream (i.e., serialize it).
 	 * 
 	 * @param s
 	 *            the stream
@@ -1284,7 +1284,7 @@ public class ExtConcurrentHashMap<K, V> extends ExtAbstractMap<K, V> implements 
 	}
 
 	/**
-	 * Reconstitute the <tt>ExtConcurrentHashMap</tt> instance from a stream (i.e., deserialize it).
+	 * Reconstitute the <tt> ConcurrentHashMap</tt> instance from a stream (i.e., deserialize it).
 	 * 
 	 * @param s
 	 *            the stream

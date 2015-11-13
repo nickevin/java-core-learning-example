@@ -1,4 +1,4 @@
-package org.javacore.collection.map;
+package org.javacore.collection.src;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -6,10 +6,10 @@ import java.util.Map.Entry;
 
 import org.javacore.collection.sort.Fruit;
 
-public class TestExtConcurrentHashMap {
+public class TestConcurrentHashMap {
 
 	public static void main(String[] args) {
-		ExtConcurrentHashMap<Fruit, String> fruits = new ExtConcurrentHashMap<Fruit, String>(8);
+		ConcurrentHashMap<Fruit, String> fruits = new ConcurrentHashMap<Fruit, String>(8);
 		fruits.put(new Fruit("Pineapple", "Pineapple description", 70), "A");
 		fruits.put(new Fruit("Apple", "Apple description", 100), "B");
 		fruits.put(new Fruit("Orange", "Orange description", 80), "C");

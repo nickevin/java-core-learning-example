@@ -1,11 +1,11 @@
 /*
- *  @(#)ExtHashMap.java	1.73 07/03/13
+ *  @(#)HashMap.java	1.73 07/03/13
  *
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package org.javacore.collection.map;
+package org.javacore.collection.src;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,37 +23,37 @@ import java.util.TreeMap;
 
 /**
  * Hash table based implementation of the <tt>Map</tt> interface. This implementation provides all of the optional map
- * operations, and permits <tt>null</tt> values and the <tt>null</tt> key. (The <tt>ExtHashMap</tt> class is roughly
+ * operations, and permits <tt>null</tt> values and the <tt>null</tt> key. (The <tt>HashMap</tt> class is roughly
  * equivalent to <tt>Hashtable</tt>, except that it is unsynchronized and permits nulls.) This class makes no guarantees
  * as to the order of the map; in particular, it does not guarantee that the order will remain constant over time.
  * 
  * <p>
  * This implementation provides constant-time performance for the basic operations (<tt>get</tt> and <tt>put</tt>),
  * assuming the hash function disperses the elements properly among the buckets. Iteration over collection views
- * requires time proportional to the "capacity" of the <tt>ExtHashMap</tt> instance (the number of buckets) plus its
- * size (the number of key-value mappings). Thus, it's very important not to set the initial capacity too high (or the
- * load factor too low) if iteration performance is important.
+ * requires time proportional to the "capacity" of the <tt>HashMap</tt> instance (the number of buckets) plus its size
+ * (the number of key-value mappings). Thus, it's very important not to set the initial capacity too high (or the load
+ * factor too low) if iteration performance is important.
  * 
  * <p>
- * An instance of <tt>ExtHashMap</tt> has two parameters that affect its performance: <i>initial capacity</i> and
- * <i>load factor</i>. The <i>capacity</i> is the number of buckets in the hash table, and the initial capacity is
- * simply the capacity at the time the hash table is created. The <i>load factor</i> is a measure of how full the hash
- * table is allowed to get before its capacity is automatically increased. When the number of entries in the hash table
- * exceeds the product of the load factor and the current capacity, the hash table is <i>rehashed</i> (that is, internal
- * data structures are rebuilt) so that the hash table has approximately twice the number of buckets.
+ * An instance of <tt>HashMap</tt> has two parameters that affect its performance: <i>initial capacity</i> and <i>load
+ * factor</i>. The <i>capacity</i> is the number of buckets in the hash table, and the initial capacity is simply the
+ * capacity at the time the hash table is created. The <i>load factor</i> is a measure of how full the hash table is
+ * allowed to get before its capacity is automatically increased. When the number of entries in the hash table exceeds
+ * the product of the load factor and the current capacity, the hash table is <i>rehashed</i> (that is, internal data
+ * structures are rebuilt) so that the hash table has approximately twice the number of buckets.
  * 
  * <p>
  * As a general rule, the default load factor (.75) offers a good tradeoff between time and space costs. Higher values
- * decrease the space overhead but increase the lookup cost (reflected in most of the operations of the
- * <tt>ExtHashMap</tt> class, including <tt>get</tt> and <tt>put</tt>). The expected number of entries in the map and
- * its load factor should be taken into account when setting its initial capacity, so as to minimize the number of
- * rehash operations. If the initial capacity is greater than the maximum number of entries divided by the load factor,
- * no rehash operations will ever occur.
+ * decrease the space overhead but increase the lookup cost (reflected in most of the operations of the <tt>HashMap</tt>
+ * class, including <tt>get</tt> and <tt>put</tt>). The expected number of entries in the map and its load factor should
+ * be taken into account when setting its initial capacity, so as to minimize the number of rehash operations. If the
+ * initial capacity is greater than the maximum number of entries divided by the load factor, no rehash operations will
+ * ever occur.
  * 
  * <p>
- * If many mappings are to be stored in a <tt>ExtHashMap</tt> instance, creating it with a sufficiently large capacity
- * will allow the mappings to be stored more efficiently than letting it perform automatic rehashing as needed to grow
- * the table.
+ * If many mappings are to be stored in a <tt>HashMap</tt> instance, creating it with a sufficiently large capacity will
+ * allow the mappings to be stored more efficiently than letting it perform automatic rehashing as needed to grow the
+ * table.
  * 
  * <p>
  * <strong>Note that this implementation is not synchronized.</strong> If multiple threads access a hash map
@@ -67,7 +67,7 @@ import java.util.TreeMap;
  * to the map:
  * 
  * <pre>
- *   Map m = Collections.synchronizedMap(new ExtHashMap(...));
+ *   Map m = Collections.synchronizedMap(new HashMap(...));
  * </pre>
  * 
  * <p>
@@ -106,7 +106,8 @@ import java.util.TreeMap;
  * @since 1.2
  */
 
-public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>, Cloneable, Serializable {
+public class HashMap<K, V> extends org.javacore.collection.src.AbstractMap<K, V> implements Map<K, V>, Cloneable,
+		Serializable {
 
 	/**
 	 * The default initial capacity - MUST be a power of two.
@@ -149,14 +150,14 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	final float loadFactor;
 
 	/**
-	 * The number of times this ExtHashMap has been structurally modified Structural modifications are those that change
-	 * the number of mappings in the ExtHashMap or otherwise modify its internal structure (e.g., rehash). This field is
-	 * used to make iterators on Collection-views of the ExtHashMap fail-fast. (See ConcurrentModificationException).
+	 * The number of times this HashMap has been structurally modified Structural modifications are those that change
+	 * the number of mappings in the HashMap or otherwise modify its internal structure (e.g., rehash). This field is
+	 * used to make iterators on Collection-views of the HashMap fail-fast. (See ConcurrentModificationException).
 	 */
 	transient volatile int modCount;
 
 	/**
-	 * Constructs an empty <tt>ExtHashMap</tt> with the specified initial capacity and load factor.
+	 * Constructs an empty <tt>HashMap</tt> with the specified initial capacity and load factor.
 	 * 
 	 * @param initialCapacity
 	 *            the initial capacity
@@ -165,7 +166,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	 * @throws IllegalArgumentException
 	 *             if the initial capacity is negative or the load factor is nonpositive
 	 */
-	public ExtHashMap(int initialCapacity, float loadFactor) {
+	public HashMap(int initialCapacity, float loadFactor) {
 		if (initialCapacity < 0) {
 			throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
 		}
@@ -190,22 +191,21 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	}
 
 	/**
-	 * Constructs an empty <tt>ExtHashMap</tt> with the specified initial capacity and the default load factor (0.75).
+	 * Constructs an empty <tt>HashMap</tt> with the specified initial capacity and the default load factor (0.75).
 	 * 
 	 * @param initialCapacity
 	 *            the initial capacity.
 	 * @throws IllegalArgumentException
 	 *             if the initial capacity is negative.
 	 */
-	public ExtHashMap(int initialCapacity) {
+	public HashMap(int initialCapacity) {
 		this(initialCapacity, DEFAULT_LOAD_FACTOR);
 	}
 
 	/**
-	 * Constructs an empty <tt>ExtHashMap</tt> with the default initial capacity (16) and the default load factor
-	 * (0.75).
+	 * Constructs an empty <tt>HashMap</tt> with the default initial capacity (16) and the default load factor (0.75).
 	 */
-	public ExtHashMap() {
+	public HashMap() {
 		this.loadFactor = DEFAULT_LOAD_FACTOR;
 		threshold = (int) (DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);
 		table = new Entry[DEFAULT_INITIAL_CAPACITY];
@@ -213,16 +213,16 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	}
 
 	/**
-	 * Constructs a new <tt>ExtHashMap</tt> with the same mappings as the specified <tt>Map</tt>. The
-	 * <tt>ExtHashMap</tt> is created with default load factor (0.75) and an initial capacity sufficient to hold the
-	 * mappings in the specified <tt>Map</tt>.
+	 * Constructs a new <tt>HashMap</tt> with the same mappings as the specified <tt>Map</tt>. The <tt>HashMap</tt> is
+	 * created with default load factor (0.75) and an initial capacity sufficient to hold the mappings in the specified
+	 * <tt>Map</tt>.
 	 * 
 	 * @param m
 	 *            the map whose mappings are to be placed in this map
 	 * @throws NullPointerException
 	 *             if the specified map is null
 	 */
-	public ExtHashMap(Map<? extends K, ? extends V> m) {
+	public HashMap(Map<? extends K, ? extends V> m) {
 		this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1, DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);
 		putAllForCreate(m);
 	}
@@ -231,15 +231,15 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 
 	/**
 	 * Initialization hook for subclasses. This method is called in all constructors and pseudo-constructors (clone,
-	 * readObject) after ExtHashMap has been initialized but before any entries have been inserted. (In the absence of
-	 * this method, readObject would require explicit knowledge of subclasses.)
+	 * readObject) after HashMap has been initialized but before any entries have been inserted. (In the absence of this
+	 * method, readObject would require explicit knowledge of subclasses.)
 	 */
 	void init() {
 	}
 
 	/**
 	 * Applies a supplemental hash function to a given hashCode, which defends against poor quality hash functions. This
-	 * is critical because ExtHashMap uses power-of-two length hash tables, that otherwise encounter collisions for
+	 * is critical because HashMap uses power-of-two length hash tables, that otherwise encounter collisions for
 	 * hashCodes that do not differ in lower bits. Note: Null keys always map to hash 0, thus index 0.
 	 */
 	static int hash(int h) {
@@ -336,7 +336,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	}
 
 	/**
-	 * Returns the entry associated with the specified key in the ExtHashMap. Returns null if the ExtHashMap contains no
+	 * Returns the entry associated with the specified key in the HashMap. Returns null if the HashMap contains no
 	 * mapping for the key.
 	 */
 	final Entry<K, V> getEntry(Object key) {
@@ -371,8 +371,8 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 		int hash = hash(key.hashCode());
 		int idx = indexFor(hash, table.length);
 
-		// System.out.println("ExtHashMap.put() hashcode: " + key.hashCode() + ", hash: " + hash + ", idx: " + idx +
-		// ", v:" + value);
+		System.out.println("HashMap.put() hashcode: " + key.hashCode() + ", hash: " + hash + ", idx: " + idx + ", v:"
+				+ value);
 
 		for (Entry<K, V> e = table[idx]; e != null; e = e.next) {
 			Object k;
@@ -547,7 +547,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	}
 
 	/**
-	 * Removes and returns the entry associated with the specified key in the ExtHashMap. Returns null if the ExtHashMap
+	 * Removes and returns the entry associated with the specified key in the HashMap. Returns null if the HashMap
 	 * contains no mapping for this key.
 	 */
 	final Entry<K, V> removeEntryForKey(Object key) {
@@ -665,15 +665,15 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	}
 
 	/**
-	 * Returns a shallow copy of this <tt>ExtHashMap</tt> instance: the keys and values themselves are not cloned.
+	 * Returns a shallow copy of this <tt>HashMap</tt> instance: the keys and values themselves are not cloned.
 	 * 
 	 * @return a shallow copy of this map
 	 */
 	@Override
 	public Object clone() {
-		ExtHashMap<K, V> result = null;
+		HashMap<K, V> result = null;
 		try {
-			result = (ExtHashMap<K, V>) super.clone();
+			result = (HashMap<K, V>) super.clone();
 		} catch (CloneNotSupportedException e) {
 			// assert false;
 		}
@@ -750,15 +750,15 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 
 		/**
 		 * This method is invoked whenever the value in an entry is overwritten by an invocation of put(k,v) for a key k
-		 * that's already in the ExtHashMap.
+		 * that's already in the HashMap.
 		 */
-		void recordAccess(ExtHashMap<K, V> m) {
+		void recordAccess(HashMap<K, V> m) {
 		}
 
 		/**
 		 * This method is invoked whenever the entry is removed from the table.
 		 */
-		void recordRemoval(ExtHashMap<K, V> m) {
+		void recordRemoval(HashMap<K, V> m) {
 		}
 	}
 
@@ -775,7 +775,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 			resize(2 * table.length);
 		}
 
-		// System.out.println("ExtHashMap.addEntry()" + table[0]);
+		// System.out.println("HashMap.addEntry()" + table[0]);
 
 	}
 
@@ -783,7 +783,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	 * Like addEntry except that this version is used when creating entries as part of Map construction or
 	 * "pseudo-construction" (cloning, deserialization). This version needn't worry about resizing the table.
 	 * 
-	 * Subclass overrides this to alter the behavior of ExtHashMap(Map), clone, and readObject.
+	 * Subclass overrides this to alter the behavior of HashMap(Map), clone, and readObject.
 	 */
 	void createEntry(int hash, K key, V value, int bucketIndex) {
 		Entry<K, V> e = table[bucketIndex];
@@ -841,7 +841,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 			}
 			Object k = current.key;
 			current = null;
-			ExtHashMap.this.removeEntryForKey(k);
+			HashMap.this.removeEntryForKey(k);
 			expectedModCount = modCount;
 		}
 
@@ -917,12 +917,12 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 
 		@Override
 		public boolean remove(Object o) {
-			return ExtHashMap.this.removeEntryForKey(o) != null;
+			return HashMap.this.removeEntryForKey(o) != null;
 		}
 
 		@Override
 		public void clear() {
-			ExtHashMap.this.clear();
+			HashMap.this.clear();
 		}
 	}
 
@@ -959,7 +959,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 
 		@Override
 		public void clear() {
-			ExtHashMap.this.clear();
+			HashMap.this.clear();
 		}
 	}
 
@@ -1012,15 +1012,15 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 
 		@Override
 		public void clear() {
-			ExtHashMap.this.clear();
+			HashMap.this.clear();
 		}
 	}
 
 	/**
-	 * Save the state of the <tt>ExtHashMap</tt> instance to a stream (i.e., serialize it).
+	 * Save the state of the <tt>HashMap</tt> instance to a stream (i.e., serialize it).
 	 * 
-	 * @serialData The <i>capacity</i> of the ExtHashMap (the length of the bucket array) is emitted (int), followed by
-	 *             the <i>size</i> (an int, the number of key-value mappings), followed by the key (Object) and value
+	 * @serialData The <i>capacity</i> of the HashMap (the length of the bucket array) is emitted (int), followed by the
+	 *             <i>size</i> (an int, the number of key-value mappings), followed by the key (Object) and value
 	 *             (Object) for each key-value mapping. The key-value mappings are emitted in no particular order.
 	 */
 	private void writeObject(java.io.ObjectOutputStream s) throws IOException {
@@ -1048,7 +1048,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 	private static final long serialVersionUID = 362498820763181265L;
 
 	/**
-	 * Reconstitute the <tt>ExtHashMap</tt> instance from a stream (i.e., deserialize it).
+	 * Reconstitute the <tt>HashMap</tt> instance from a stream (i.e., deserialize it).
 	 */
 	private void readObject(java.io.ObjectInputStream s) throws IOException, ClassNotFoundException {
 		// Read in the threshold, loadfactor, and any hidden stuff
@@ -1063,7 +1063,7 @@ public class ExtHashMap<K, V> extends ExtAbstractMap<K, V> implements Map<K, V>,
 		// Read in size (number of Mappings)
 		int size = s.readInt();
 
-		// Read the keys and values, and put the mappings in the ExtHashMap
+		// Read the keys and values, and put the mappings in the HashMap
 		for (int i = 0; i < size; i++) {
 			K key = (K) s.readObject();
 			V value = (V) s.readObject();

@@ -1,18 +1,17 @@
 /*
- * @(#)ExtAbstractMap.java	1.50 06/06/16
+ * @(#)AbstractMap.java	1.50 06/06/16
  *
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package org.javacore.collection.map;
+package org.javacore.collection.src;
 
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -55,11 +54,11 @@ import java.util.Set;
  * @since 1.2
  */
 
-public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
+public abstract class AbstractMap<K, V> implements Map<K, V> {
 	/**
 	 * Sole constructor. (For invocation by subclass constructors, typically implicit.)
 	 */
-	protected ExtAbstractMap() {
+	protected AbstractMap() {
 	}
 
 	// Query Operations
@@ -70,6 +69,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * <p>
 	 * This implementation returns <tt>entrySet().size()</tt>.
 	 */
+	@Override
 	public int size() {
 		return entrySet().size();
 	}
@@ -80,6 +80,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * <p>
 	 * This implementation returns <tt>size() == 0</tt>.
 	 */
+	@Override
 	public boolean isEmpty() {
 		return size() == 0;
 	}
@@ -97,19 +98,22 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @throws NullPointerException
 	 *             {@inheritDoc}
 	 */
+	@Override
 	public boolean containsValue(Object value) {
 		Iterator<Entry<K, V>> i = entrySet().iterator();
 		if (value == null) {
 			while (i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (e.getValue() == null)
+				if (e.getValue() == null) {
 					return true;
+				}
 			}
 		} else {
 			while (i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (value.equals(e.getValue()))
+				if (value.equals(e.getValue())) {
 					return true;
+				}
 			}
 		}
 		return false;
@@ -129,19 +133,22 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @throws NullPointerException
 	 *             {@inheritDoc}
 	 */
+	@Override
 	public boolean containsKey(Object key) {
 		Iterator<Map.Entry<K, V>> i = entrySet().iterator();
 		if (key == null) {
 			while (i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (e.getKey() == null)
+				if (e.getKey() == null) {
 					return true;
+				}
 			}
 		} else {
 			while (i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (key.equals(e.getKey()))
+				if (key.equals(e.getKey())) {
 					return true;
+				}
 			}
 		}
 		return false;
@@ -161,19 +168,22 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @throws NullPointerException
 	 *             {@inheritDoc}
 	 */
+	@Override
 	public V get(Object key) {
 		Iterator<Entry<K, V>> i = entrySet().iterator();
 		if (key == null) {
 			while (i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (e.getKey() == null)
+				if (e.getKey() == null) {
 					return e.getValue();
+				}
 			}
 		} else {
 			while (i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (key.equals(e.getKey()))
+				if (key.equals(e.getKey())) {
 					return e.getValue();
+				}
 			}
 		}
 		return null;
@@ -196,6 +206,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @throws IllegalArgumentException
 	 *             {@inheritDoc}
 	 */
+	@Override
 	public V put(K key, V value) {
 		throw new UnsupportedOperationException();
 	}
@@ -221,20 +232,23 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @throws NullPointerException
 	 *             {@inheritDoc}
 	 */
+	@Override
 	public V remove(Object key) {
 		Iterator<Entry<K, V>> i = entrySet().iterator();
 		Entry<K, V> correctEntry = null;
 		if (key == null) {
 			while (correctEntry == null && i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (e.getKey() == null)
+				if (e.getKey() == null) {
 					correctEntry = e;
+				}
 			}
 		} else {
 			while (correctEntry == null && i.hasNext()) {
 				Entry<K, V> e = i.next();
-				if (key.equals(e.getKey()))
+				if (key.equals(e.getKey())) {
 					correctEntry = e;
+				}
 			}
 		}
 
@@ -268,9 +282,11 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @throws IllegalArgumentException
 	 *             {@inheritDoc}
 	 */
+	@Override
 	public void putAll(Map<? extends K, ? extends V> m) {
-		for (Map.Entry<? extends K, ? extends V> e : m.entrySet())
+		for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
 			put(e.getKey(), e.getValue());
+		}
 	}
 
 	/**
@@ -286,6 +302,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @throws UnsupportedOperationException
 	 *             {@inheritDoc}
 	 */
+	@Override
 	public void clear() {
 		entrySet().clear();
 	}
@@ -312,33 +329,40 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * synchronization is performed, so there is a slight chance that multiple calls to this method will not all return
 	 * the same set.
 	 */
+	@Override
 	public Set<K> keySet() {
 		if (keySet == null) {
 			keySet = new AbstractSet<K>() {
+				@Override
 				public Iterator<K> iterator() {
 					return new Iterator<K>() {
-						private Iterator<Entry<K, V>> i = entrySet().iterator();
+						private final Iterator<Entry<K, V>> i = entrySet().iterator();
 
+						@Override
 						public boolean hasNext() {
 							return i.hasNext();
 						}
 
+						@Override
 						public K next() {
 							return i.next().getKey();
 						}
 
+						@Override
 						public void remove() {
 							i.remove();
 						}
 					};
 				}
 
+				@Override
 				public int size() {
-					return ExtAbstractMap.this.size();
+					return AbstractMap.this.size();
 				}
 
+				@Override
 				public boolean contains(Object k) {
-					return ExtAbstractMap.this.containsKey(k);
+					return AbstractMap.this.containsKey(k);
 				}
 			};
 		}
@@ -359,39 +383,47 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * No synchronization is performed, so there is a slight chance that multiple calls to this method will not all
 	 * return the same collection.
 	 */
+	@Override
 	public Collection<V> values() {
 		if (values == null) {
 			values = new AbstractCollection<V>() {
+				@Override
 				public Iterator<V> iterator() {
 					return new Iterator<V>() {
-						private Iterator<Entry<K, V>> i = entrySet().iterator();
+						private final Iterator<Entry<K, V>> i = entrySet().iterator();
 
+						@Override
 						public boolean hasNext() {
 							return i.hasNext();
 						}
 
+						@Override
 						public V next() {
 							return i.next().getValue();
 						}
 
+						@Override
 						public void remove() {
 							i.remove();
 						}
 					};
 				}
 
+				@Override
 				public int size() {
-					return ExtAbstractMap.this.size();
+					return AbstractMap.this.size();
 				}
 
+				@Override
 				public boolean contains(Object v) {
-					return ExtAbstractMap.this.containsValue(v);
+					return AbstractMap.this.containsValue(v);
 				}
 			};
 		}
 		return values;
 	}
 
+	@Override
 	public abstract Set<Entry<K, V>> entrySet();
 
 	// Comparison and hashing
@@ -413,15 +445,19 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 *            object to be compared for equality with this map
 	 * @return <tt>true</tt> if the specified object is equal to this map
 	 */
+	@Override
 	public boolean equals(Object o) {
-		if (o == this)
+		if (o == this) {
 			return true;
+		}
 
-		if (!(o instanceof Map))
+		if (!(o instanceof Map)) {
 			return false;
+		}
 		Map<K, V> m = (Map<K, V>) o;
-		if (m.size() != size())
+		if (m.size() != size()) {
 			return false;
+		}
 
 		try {
 			Iterator<Entry<K, V>> i = entrySet().iterator();
@@ -430,11 +466,13 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 				K key = e.getKey();
 				V value = e.getValue();
 				if (value == null) {
-					if (!(m.get(key) == null && m.containsKey(key)))
+					if (!(m.get(key) == null && m.containsKey(key))) {
 						return false;
+					}
 				} else {
-					if (!value.equals(m.get(key)))
+					if (!value.equals(m.get(key))) {
 						return false;
+					}
 				}
 			}
 		} catch (ClassCastException unused) {
@@ -461,11 +499,13 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * @see Object#equals(Object)
 	 * @see Set#equals(Object)
 	 */
+	@Override
 	public int hashCode() {
 		int h = 0;
 		Iterator<Entry<K, V>> i = entrySet().iterator();
-		while (i.hasNext())
+		while (i.hasNext()) {
 			h += i.next().hashCode();
+		}
 		return h;
 	}
 
@@ -478,10 +518,12 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 	 * 
 	 * @return a string representation of this map
 	 */
+	@Override
 	public String toString() {
 		Iterator<Entry<K, V>> i = entrySet().iterator();
-		if (!i.hasNext())
+		if (!i.hasNext()) {
 			return "{}";
+		}
 
 		StringBuilder sb = new StringBuilder();
 		sb.append('{');
@@ -492,19 +534,21 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 			sb.append(key == this ? "(this Map)" : key);
 			sb.append('=');
 			sb.append(value == this ? "(this Map)" : value);
-			if (!i.hasNext())
+			if (!i.hasNext()) {
 				return sb.append('}').toString();
+			}
 			sb.append(", ");
 		}
 	}
 
 	/**
-	 * Returns a shallow copy of this <tt>ExtAbstractMap</tt> instance: the keys and values themselves are not cloned.
+	 * Returns a shallow copy of this <tt>AbstractMap</tt> instance: the keys and values themselves are not cloned.
 	 * 
 	 * @return a shallow copy of this map
 	 */
+	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		ExtAbstractMap<K, V> result = (ExtAbstractMap<K, V>) super.clone();
+		AbstractMap<K, V> result = (AbstractMap<K, V>) super.clone();
 		result.keySet = null;
 		result.values = null;
 		return result;
@@ -566,6 +610,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * 
 		 * @return the key corresponding to this entry
 		 */
+		@Override
 		public K getKey() {
 			return key;
 		}
@@ -575,6 +620,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * 
 		 * @return the value corresponding to this entry
 		 */
+		@Override
 		public V getValue() {
 			return value;
 		}
@@ -586,6 +632,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 *            new value to be stored in this entry
 		 * @return the old value corresponding to the entry
 		 */
+		@Override
 		public V setValue(V value) {
 			V oldValue = this.value;
 			this.value = value;
@@ -610,9 +657,11 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * @return {@code true} if the specified object is equal to this map entry
 		 * @see #hashCode
 		 */
+		@Override
 		public boolean equals(Object o) {
-			if (!(o instanceof Map.Entry))
+			if (!(o instanceof Map.Entry)) {
 				return false;
+			}
 			Map.Entry e = (Map.Entry) o;
 			return eq(key, e.getKey()) && eq(value, e.getValue());
 		}
@@ -630,6 +679,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * @return the hash code value for this map entry
 		 * @see #equals
 		 */
+		@Override
 		public int hashCode() {
 			return (key == null ? 0 : key.hashCode()) ^ (value == null ? 0 : value.hashCode());
 		}
@@ -641,6 +691,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * 
 		 * @return a String representation of this map entry
 		 */
+		@Override
 		public String toString() {
 			return key + "=" + value;
 		}
@@ -688,6 +739,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * 
 		 * @return the key corresponding to this entry
 		 */
+		@Override
 		public K getKey() {
 			return key;
 		}
@@ -697,6 +749,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * 
 		 * @return the value corresponding to this entry
 		 */
+		@Override
 		public V getValue() {
 			return value;
 		}
@@ -712,6 +765,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * @throws UnsupportedOperationException
 		 *             always
 		 */
+		@Override
 		public V setValue(V value) {
 			throw new UnsupportedOperationException();
 		}
@@ -734,9 +788,11 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * @return {@code true} if the specified object is equal to this map entry
 		 * @see #hashCode
 		 */
+		@Override
 		public boolean equals(Object o) {
-			if (!(o instanceof Map.Entry))
+			if (!(o instanceof Map.Entry)) {
 				return false;
+			}
 			Map.Entry e = (Map.Entry) o;
 			return eq(key, e.getKey()) && eq(value, e.getValue());
 		}
@@ -754,6 +810,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * @return the hash code value for this map entry
 		 * @see #equals
 		 */
+		@Override
 		public int hashCode() {
 			return (key == null ? 0 : key.hashCode()) ^ (value == null ? 0 : value.hashCode());
 		}
@@ -765,6 +822,7 @@ public abstract class ExtAbstractMap<K, V> implements Map<K, V> {
 		 * 
 		 * @return a String representation of this map entry
 		 */
+		@Override
 		public String toString() {
 			return key + "=" + value;
 		}
