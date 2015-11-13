@@ -1,7 +1,5 @@
 package org.javacore.collection.sort;
 
-import java.util.Comparator;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
