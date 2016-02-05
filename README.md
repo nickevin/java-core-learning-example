@@ -4,7 +4,7 @@
 ## 作者与学习乐园
 源码地址:我的[GitHub地址](https://github.com/JeffLi1993 "GitHub")<br>
 作者： [李强强](http://www.bysocket.com/ "李强强")<br>
-QQ群：编程之美 365234583 [立即加入](http://jq.qq.com/?_wv=1027&k=Sx4s4U "编程之美")
+QQ群：编程之美 365234583  [立即加入](http://jq.qq.com/?_wv=1027&k=Sx4s4U "编程之美")
 
 ## 项目结构
 - src 目录<br>
@@ -14,6 +14,7 @@ Java核心技术学习代码兼测试案例<br>
 
 包目录：
 
+	├── org.javacore.base		// Java基础必备
 	├── org.javacore.collection	// Java集合
 	├── org.javacore.collection.list	// Java集合List
 	├── org.javacore.collection.map	// Java集合Map
@@ -34,6 +35,11 @@ Java核心技术学习代码兼测试案例<br>
 详细目录：
 
 	├── README.md						// 项目唯一详细文档
+	├── org.javacore.base			// Java基础必备
+	├── 	CopyT.java						// 深拷贝与浅拷贝
+	├── org.javacore.base.inter		// Java接口
+	├── 	ApplyClass.java					// 不使用接口的接口案例
+	├── 	ApplyInter.java					// 使用接口的接口案例
 	├── org.javacore.collection		// Java集合
 	├── 	PerBtwnAllCollectionsT.java		// 各集合添加方法性能对比
 	├── org.javacore.collection.list		// Java集合List
@@ -52,13 +58,13 @@ Java核心技术学习代码兼测试案例<br>
 	├── 	SetContainT.java				// Set的Contains方法
 	├── 	TreeSetT.java					// TreeSet操作实现Comparable接口的对象
 	├── org.javacore.collection.util		// Java集合工具类
-	├── 	CollectionsT.java				// Collections的使用	
+	├── 	CollectionsT.java				// Collections的使用
 	├── 	IterAndListIterT.java			// Iterator与ListIterator的区别
 	├── 	PerBtwnEmptyMapAndHashMapT.java	// Collections.EMPTY_MAP 与 new HashMap 性能对比
 	├── org.javacore.initAndCleanup	// Java初始化及清理
 	├── 	SimpleConstructor.java			// 简单构造器的展示
 	├── 	SimpleConstructor2.java			// 带参数简单构造器的展示
-	├── 	VoidConstructor.java			// 默认构造函数和方法的区别	
+	├── 	VoidConstructor.java			// 默认构造函数和方法的区别
 	├── org.javacore.io				// Java IO
 	├── 	BufferedInputFileT.java			// 缓冲输入文件
 	├── 	CopyFileT.java					// 文件复制
@@ -123,8 +129,8 @@ Java核心技术学习代码兼测试案例<br>
 	├── 	MyThread.java					// Thread的简单使用
 	├── 	SimpleDaemons.java				// Daemon后台线程的简单使用
    	├── 	SimplePriorities.java			// 线程优先级的使用
-	├── 	SingleThreadExecutor.java		// 	SingleThreadExecutor的使用
-	├── 	SleepingTask.java			 // 休眠线程sleep的使用
+	├── 	SingleThreadExecutor.java		// SingleThreadExecutor的使用
+	├── 	SleepingTask.java			    // 休眠线程sleep的使用
 	拼命更新！顶！d=====(￣▽￣*)b
 
 ##学习方法
