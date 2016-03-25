@@ -1,24 +1,28 @@
 package org.javacore.thread.threadlocal;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 描述:私有变量会被所有线程共享
- * Created by bysocket on 16/3/8.
+ * 描述:私有变量会被所有线程共享 Created by bysocket on 16/3/8.
  */
-public class UnsafeTask implements Runnable{
-    private Date startDate;
+public class UnsafeTask implements Runnable {
 
-    @Override
-    public void run() {
-        startDate = new Date();
-        System.out.printf("Starting Thread:%s : %s\n",Thread.currentThread().getId(),startDate);
-        try {
-            TimeUnit.SECONDS.sleep((int) Math.rint(Math.random() * 10));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.printf("Finish Thread:%s : %s\n",Thread.currentThread().getId(),startDate);
+  private static final AtomicInteger nextId = new AtomicInteger(0);
+
+  public int getThreadId() {
+    return nextId.getAndIncrement();
+  }
+
+  @Override
+  public void run() {
+
+    System.out.printf("Starting Thread:%s : %s\n", Thread.currentThread().getId(), getThreadId());
+    try {
+      TimeUnit.SECONDS.sleep(10);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
+    System.out.printf("Finish Thread:%s : %s\n", Thread.currentThread().getId(), getThreadId());
+  }
 }
